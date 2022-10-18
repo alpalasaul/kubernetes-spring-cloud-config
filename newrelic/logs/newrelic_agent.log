@@ -1,0 +1,1 @@
+2022-09-29T20:08:04,251-0500 [293697 85] com.newrelic WARN: Received a ForceRestartException: com.newrelic.agent.ForceRestartException: . The agent will attempt to reconnect for data reporting. If this message continues, please contact support via https://support.newrelic.com/.

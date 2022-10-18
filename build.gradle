@@ -1,0 +1,45 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.11'
+    id 'io.spring.dependency-management' version '1.0.13.RELEASE'
+    id "de.undercouch.download" version "3.4.3"
+    id 'java'
+}
+
+group = 'krypton.dev'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+import de.undercouch.gradle.tasks.download.Download
+
+apply plugin: 'java'
+apply plugin: 'de.undercouch.download'
+
+task downloadNewrelic(type: Download) {
+    mkdir 'newrelic'
+    src 'https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip'
+    dest file('newrelic')
+}
+
+task unzipNewrelic(type: Copy) {
+    from zipTree(file('newrelic/newrelic-java.zip'))
+    into rootDir
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.postgresql:postgresql:42.5.0'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
