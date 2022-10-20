@@ -13,15 +13,11 @@ public class ConfigApp implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ConfigApp.class);
 
-    @Value("${test.myvar}")
-    private String myVar;
-
     @Override
     public void run(String... args) throws Exception {
         LOGGER.info("\uD83D\uDE80 Iniciando app");
         System.out.println("::::::::INICIANDO PLAIN TEXT");
         System.out.printf("%s %s %d --- %s   : %s", LocalDateTime.now(), "INFO", 234523,"Test App", "Este es un mensaje de prueba");
-        System.out.println(myVar);
     }
 
 }

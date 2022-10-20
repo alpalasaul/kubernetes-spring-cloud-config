@@ -1,9 +1,13 @@
 spring:
   datasource:
-    username: rahteipx
-    password: cyt2iL8BshuTMPQCLPdlhdOx3JP3HEe4
-    url: jdbc:postgresql://jelani.db.elephantsql.com/rahteipx
-    driver-class-name: org.postgresql.Driver
+#    username: rahteipx
+#    password: cyt2iL8BshuTMPQCLPdlhdOx3JP3HEe4
+#    url: jdbc:postgresql://jelani.db.elephantsql.com/rahteipx
+#    driver-class-name: org.postgresql.Driver
+    username: ${SALERT_USERNAME}
+    password: ${SALERT_PASSWORD}
+    url: ${SALERT_URL}
+    driver-class-name: ${SALERT_DRIVER}
   jpa:
     hibernate:
       ddl-auto: create
@@ -11,7 +15,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    kubernetes:
+
 server:
   port: 9099
-test:
-  myvar: ${TEST}
