@@ -1,0 +1,46 @@
+variables:
+  IMAGE_NAME: alpalasaul/krypton-k8s-dev
+  IMAGE_TAG: v1
+  REGISTRY: registry.gitlab.com
+
+stages:
+  - build-app
+  - build-registry
+  - deploy
+
+build-app:
+  stage: build-app
+  image: openjdk:11
+  script:
+    - echo "Empaquetando app..."
+      - ./gradlew clean build
+
+build-registry:
+  stage: build-registry
+  image: docker:20.10.18
+  services:
+    - name: docker:20.10.18-dind
+      alias: dockerhost
+  variables:
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_DRIVER: overlay2
+    DOCKER_HOST: "tcp://dockerhost:2375/"
+  before_script:
+    - echo "Login on Gitlab Container Registry..."
+    - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
+    - echo "Successfully logged"
+    - echo "Build Java App"
+    - ./gradlew clean build
+  script:
+    - docker build -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG .
+    - docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
+
+deploy:
+  stage: deploy
+  environment: production
+  script:
+    - echo "Deploying application..."
+    - echo "Application successfully deployed."
+  only:
+    refs:
+      - main
