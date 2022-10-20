@@ -13,7 +13,7 @@ build-app:
   image: openjdk:11
   script:
     - echo "Empaquetando app..."
-    - sh $CI_REGISTRY/gradlew clean build
+    - sh ./gradlew clean build
 
 build-registry:
   stage: build-registry
