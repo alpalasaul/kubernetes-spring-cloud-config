@@ -1,5 +1,5 @@
 variables:
-  IMAGE_NAME: alpalasaul/krypton-k8s-dev
+  IMAGE_NAME: alpalasaul/spring-k8s-dev
   IMAGE_TAG: v1
   REGISTRY: registry.gitlab.com
 
@@ -14,6 +14,9 @@ build-app:
   script:
     - echo "Empaquetando app..."
     - sh ./gradlew clean build
+  only:
+    refs:
+      - main
 
 build-registry:
   stage: build-registry
