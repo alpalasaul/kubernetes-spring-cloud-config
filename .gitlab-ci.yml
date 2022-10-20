@@ -29,8 +29,6 @@ build-registry:
     - echo "Login on Gitlab Container Registry..."
     - docker login -u $CI_DEPLOY_USER -p $CI_DEPLOY_PASSWORD $CI_REGISTRY
     - echo "Successfully logged"
-    - echo "Build Java App"
-    - ./gradlew clean build
   script:
     - docker build -t $REGISTRY/$IMAGE_NAME:$IMAGE_TAG .
     - docker push $REGISTRY/$IMAGE_NAME:$IMAGE_TAG
