@@ -54,7 +54,7 @@ deploy:
     - echo $KUBECONFIG
     - kubectl config get-contexts
 #    - kubectl config use-context lke76774-ctx
-    - kubectl get pods
+#    - kubectl get pods
     - echo "Application successfully deployed."
     - echo "Bye Stranger :)"
   only:
