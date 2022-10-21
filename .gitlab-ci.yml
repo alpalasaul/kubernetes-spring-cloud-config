@@ -54,3 +54,5 @@ deploy:
   only:
     refs:
       - master
+  tags:
+    - k8s
