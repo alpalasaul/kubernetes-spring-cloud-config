@@ -49,6 +49,8 @@ deploy:
   script:
     - echo "Deploying application..."
     - echo "Application successfully deployed."
+    - kubectl get pods
+    - echo "Bye Stranger :)"
   only:
     refs:
-      - main
+      - master
