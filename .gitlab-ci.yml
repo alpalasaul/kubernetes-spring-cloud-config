@@ -51,8 +51,10 @@ deploy:
   environment: production
   script:
     - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - echo $KUBECONFIG
+    - kubectl config use-context lke76774-ctx
     - kubectl get pods
+    - echo "Application successfully deployed."
     - echo "Bye Stranger :)"
   only:
     refs:
